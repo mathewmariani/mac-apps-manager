@@ -1,0 +1,2 @@
+# mam
+Mac App Manager
