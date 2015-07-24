@@ -1,0 +1,35 @@
+.callout {
+  padding: 20px;
+  margin-bottom: 20px;
+  color: #fff; }
+
+.callout-info {
+  background-color: #3498db; }
+
+.callout-warning {
+  background-color: #f1c40f; }
+
+.callout-danger {
+  background-color: #e74c3c; }
+
+.example pre {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  word-break: normal;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0; }
+
+.docs-container .docs-section {
+  margin-bottom: 60px; }
+  .docs-container .docs-section:last-child {
+    margin-bottom: 0px; }
+
+.docs-footer {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 100px;
+  color: #767676;
+  text-align: center;
+  border-top: 1px solid #e5e5e5; }
