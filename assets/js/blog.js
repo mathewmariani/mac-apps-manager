@@ -13,7 +13,7 @@ blog.controller('FormController', function ($scope, $http, $location) {
 
         for (app in $scope.apps) {
             if ($scope.apps[app]) {
-                console.log('curl -s ' + $location.host() + '/_includes/' + app + ' | sh');
+                console.log('curl -s ' + $location.absUrl() + '/_includes/' + app + ' | sh');
             }
         }
     };
