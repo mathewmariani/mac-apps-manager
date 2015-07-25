@@ -10,8 +10,8 @@ html(ng-app='blogApp')
         link(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css', rel='stylesheet')
 
         // @NOTE load blog
-        script(src='../assets/js/blog.js')
-        link(href='../assets/css/main.css' rel='stylesheet')
+        script(src='./assets/js/blog.js')
+        link(href='./assets/css/main.css' rel='stylesheet')
 
     body
         div(class='container' ng-controller='FormController')
@@ -100,6 +100,13 @@ html(ng-app='blogApp')
 
                     div(class='docs-section')
                         button(type='submit' class='btn btn-default btn-lg btn-block') Compile
+
+                    div(class='docs-section')
+                        div(class='panel panel-default')
+                            div(class='panel-body')
+                                strong Copy this command into Terminal
+                            div(class='panel-footer')
+                                pre {{ cmd }}
 
 footer(class='docs-footer')
     p Pre-Alpha v0.0.0
