@@ -1,4 +1,4 @@
-html(ng-app='blogApp')
+html(ng-app='mac-apps-manager')
     head
         meta(charset='utf-8')
         meta(name='viewport', content='width=device-width, initial-scale=1.0')
@@ -10,103 +10,63 @@ html(ng-app='blogApp')
         link(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css', rel='stylesheet')
 
         // @NOTE load blog
-        script(src='./assets/js/blog.js')
+        script(src='./assets/js/app.js')
         link(href='./assets/css/main.css' rel='stylesheet')
 
     body
-        div(class='container' ng-controller='FormController')
+        div(class='container')
             form(class='tools' ng-submit='submit()')
                 button(class='btn btn-default toggle pull-right' type='button' ng-click='toggle()') Toggle All
-                h1(class='page-header') Mac App Manager
+                h1(class='page-header') Mac Apps Manager
 
                 div(class="alert alert-danger" role="alert")
                     Strong Oh Snap!
-                    |  Only Browsers seems to be working.
+                    |  Only the browsers seem to be working.
 
-                div(class='docs-container')
+                div(class='docs-container' ng-controller='FormController')
                     div(class='docs-section')
                         div(class='row')
 
-                            div(class='col-md-3')
+                            div(class='col-xs-3 col-md-3')
                                 h3 Browsers
-                                div(class='checkbox')
+                                div(class='checkbox' ng-repeat='browser in apps.browsers')
                                     label
-                                        input(type='checkbox' ng-model='apps.googlechrome')
-                                        | Google Chrome
-                                div(class='checkbox')
-                                    label
-                                        input(type='checkbox' ng-model='apps.opera')
-                                        | Opera
-                                div(class='checkbox')
-                                    label
-                                        input(type='checkbox' ng-model='apps.firefox')
-                                        | Firefox
+                                        input(type="checkbox" ng-click="toggle(browser.name)")
+                                        | {{ browser.name }}
 
-                            div(class='col-md-3')
+                            div(class='col-xs-3 col-md-3')
                                 h3 Development
-                                div(class='checkbox')
+                                div(class='checkbox' ng-repeat='dev in apps.development')
                                     label
-                                        input(type='checkbox' ng-model='apps.brackets')
-                                        | Brackets
-                                div(class='checkbox')
-                                    label
-                                        input(type='checkbox' ng-model='apps.github')
-                                        | GitHub
-                                div(class='checkbox')
-                                    label
-                                        input(type='checkbox' ng-model='apps.koala')
-                                        | Koala
-                                div(class='checkbox')
-                                    label
-                                        input(type='checkbox' ng-model='apps.nodejs')
-                                        | Node.JS
-                                div(class='checkbox')
-                                    label
-                                        input(type='checkbox' ng-model='apps.sublime2')
-                                        | Sublime Text 2
+                                        input(type="checkbox" ng-click="toggle(dev.name)")
+                                        | {{ dev.name }}
 
-                            div(class='col-md-3')
+                            div(class='col-xs-3 col-md-3')
                                 h3 Productivity
-                                div(class='checkbox')
+                                div(class='checkbox' ng-repeat='prod in apps.productivity')
                                     label
-                                        input(type='checkbox' ng-model='apps.dropbox')
-                                        | Dropbox
-                                div(class='checkbox')
-                                    label
-                                        input(type='checkbox' ng-model='apps.googledrive')
-                                        | Google Drive
-                                div(class='checkbox')
-                                    label
-                                        input(type='checkbox' ng-model='apps.onedrive')
-                                        | OneDrive
+                                        input(type="checkbox" ng-click="toggle(prod.name)")
+                                        | {{ prod.name }}
 
-                            div(class='col-md-3')
+                            div(class='col-xs-3 col-md-3')
                                 h3 Miscellaneous
-                                div(class='checkbox')
+                                div(class='checkbox' ng-repeat='misc in apps.misc')
                                     label
-                                        input(type='checkbox' ng-model='apps.steam')
-                                        | Steam
-                                div(class='checkbox')
-                                    label
-                                        input(type='checkbox' ng-model='apps.vlc')
-                                        | VLC Player
-                                div(class='checkbox')
-                                    label
-                                        input(type='checkbox' ng-model='apps.unarchiver')
-                                        | The Unarchiver
+                                        input(type="checkbox" ng-click="toggle(misc.name)")
+                                        | {{ misc.name }}
 
                     div(class='docs-section')
-                        pre {{ apps | json }}
+                        pre {{ selection | json }}
 
                     div(class='docs-section')
-                        button(type='submit' class='btn btn-default btn-lg btn-block') Compile
+                        button(type='submit' class='btn btn-default btn-lg btn-block' ng-click='submit()') Compile
 
                     div(class='docs-section')
                         div(class='panel panel-default')
                             div(class='panel-body')
-                                strong Copy this command into Terminal
+                                strong  Copy this command into Terminal
                             div(class='panel-footer')
                                 pre {{ cmd }}
 
 footer(class='docs-footer')
-    p Pre-Alpha v0.0.0
+    p Pre-Alpha v0.0.1
