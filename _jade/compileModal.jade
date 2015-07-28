@@ -1,0 +1,17 @@
+div(class='modal-header')
+    h3(class='modal-title') Queue
+
+div(class='modal-body')
+    pre {{ selection | json }}
+
+    div(class='panel panel-default')
+        div(class='panel-footer')
+            pre {{ cmd }}
+
+    p Paste that at a Terminal prompt.
+
+div(class='modal-footer')
+    button(class='btn btn-default' ng-click='cancel()') Close
+    button(class='btn btn-primary' clip-copy="cmd")
+        span(class="glyphicon glyphicon-copy" aria-hidden="true")
+        |  Copy to Clipboard

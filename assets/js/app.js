@@ -1,6 +1,6 @@
-var blog = angular.module('mac-apps-manager', []);
+var app = angular.module('mac-apps-manager', ['ui.bootstrap', 'ngClipboard']);
 
-blog.factory('AppService', function ($http, $q) {
+app.factory('AppService', function ($http, $q) {
     return {
         query: function () {
             var deferred = $q.defer();
@@ -18,7 +18,7 @@ blog.factory('AppService', function ($http, $q) {
     };
 });
 
-blog.controller('FormController', function ($scope, $http, $location, AppService) {
+app.controller('FormController', function ($scope, $http, $location, AppService, $modal) {
     $scope.selection = [];
     $scope.cmd = '';
 
@@ -59,4 +59,46 @@ blog.controller('FormController', function ($scope, $http, $location, AppService
 
         $scope.cmd = command;
     };
+
+    $scope.open = function () {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'compileModal.html',
+            controller: 'CompilerModalController',
+            resolve: {
+                selection: function () {
+                    return $scope.selection;
+                }
+            }
+        });
+
+        modalInstance.result.then(function () {
+            console.log('success');
+        }, function () {
+            console.log('cancel');
+        });
+    };
+});
+
+app.controller('CompilerModalController', function ($scope, $modalInstance, selection) {
+    $scope.selection = selection;
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+
+    var command = "";
+
+    for (app in $scope.selection) {
+        if ($scope.selection[app]) {
+            var str = "curl -s https://raw.githubusercontent.com/nonsane/mac-apps/master/" + $scope.selection[app] + " | sh";
+
+            if (!command) {
+                command = command + str;
+            } else {
+                command = command + " && " + str;
+            }
+        }
+    }
+
+    $scope.cmd = command;
 });

@@ -3,27 +3,27 @@ html(ng-app='mac-apps-manager')
         meta(charset='utf-8')
         meta(name='viewport', content='width=device-width, initial-scale=1.0')
 
-        // @NOTE load angularjs
-        script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js")
-
-        // @NOTE load boostrap
-        link(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css', rel='stylesheet')
-
-        // @NOTE load blog
+        // @NOTE load javascript
+        script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js')
+        script(src='./assets/js/ui-bootstrap-tpls-0.13.1.js')
+        script(src='./assets/js/ZeroClipboard.min.js')
+        script(src='//cdnjs.cloudflare.com/ajax/libs/ng-clip/0.2.6/ng-clip.min.js')
         script(src='./assets/js/app.js')
+
+        // @NOTE load stylesheets
+        link(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css', rel='stylesheet')
         link(href='./assets/css/main.css' rel='stylesheet')
 
     body
-        div(class='container')
+        div(class='container' ng-controller='FormController')
             form(class='tools' ng-submit='submit()')
-                button(class='btn btn-default toggle pull-right' type='button' ng-click='toggle()') Toggle All
                 h1(class='page-header') Mac Apps Manager
 
-                div(class="alert alert-danger" role="alert")
-                    Strong Oh Snap!
-                    |  Only the browsers seem to be working.
+                div(class="alert alert-warning" role="alert")
+                    Strong Warning!
+                    |  We are still under development.
 
-                div(class='docs-container' ng-controller='FormController')
+                div(class='docs-container')
                     div(class='docs-section')
                         div(class='row')
 
@@ -56,17 +56,7 @@ html(ng-app='mac-apps-manager')
                                         | {{ misc.name }}
 
                     div(class='docs-section')
-                        pre {{ selection | json }}
-
-                    div(class='docs-section')
-                        button(type='submit' class='btn btn-default btn-lg btn-block' ng-click='submit()') Compile
-
-                    div(class='docs-section')
-                        div(class='panel panel-default')
-                            div(class='panel-body')
-                                strong  Copy this command into Terminal
-                            div(class='panel-footer')
-                                pre {{ cmd }}
+                        button(type='submit' class='btn btn-default btn-lg btn-block' ng-click='open()') Compile
 
 footer(class='docs-footer')
-    p Pre-Alpha v0.0.1
+    p Alpha v0.1.0
