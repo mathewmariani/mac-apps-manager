@@ -18,6 +18,7 @@ html(ng-app='mac-apps-manager')
         div(class='container' ng-controller='FormController')
             form(class='tools' ng-submit='submit()')
                 h1(class='page-header') Mac Apps Manager
+                p(class='lead') Choose which applications to compile into a custom install.
 
                 alert(ng-repeat='alert in alerts' type='{{ alert.type }}' close='closeAlert($index)')
                     | {{ alert.msg }}
@@ -55,7 +56,7 @@ html(ng-app='mac-apps-manager')
                                         | {{ misc.name }}
 
                     div(class='docs-section')
-                        button(type='submit' class='btn btn btn-primary btn-lg btn-block' ng-click='open()' ng-disabled='selection <= 0') Compile
+                        button(type='submit' class='btn btn-primary btn-lg btn-block' ng-click='open()' ng-disabled='selection <= 0') Compile
 
 footer(class='docs-footer')
     p Alpha v0.1.2
