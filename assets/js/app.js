@@ -20,7 +20,25 @@ app.factory('AppService', function ($http, $q) {
 
 app.controller('FormController', function ($scope, $http, $location, AppService, $modal) {
     $scope.selection = [];
-    $scope.cmd = '';
+    $scope.alerts = [
+        {
+            type: 'warning',
+            msg: 'Warning! We are still under development!'
+        },
+    ];
+
+    // @NOTE add a new alert
+    $scope.addAlert = function (type, msg) {
+        $scope.alerts.push({
+            type: type,
+            msg: msg
+        });
+    };
+
+    // @NOTE remove alerts
+    $scope.closeAlert = function (index) {
+        $scope.alerts.splice(index, 1);
+    };
 
     $scope.getApps = function () {
         AppService.query()
@@ -42,25 +60,11 @@ app.controller('FormController', function ($scope, $http, $location, AppService,
         }
     };
 
-    $scope.submit = function () {
-        var command = "";
-
-        for (app in $scope.selection) {
-            if ($scope.selection[app]) {
-                var str = "curl -s https://raw.githubusercontent.com/nonsane/mac-apps/master/" + $scope.selection[app] + " | sh";
-
-                if (!command) {
-                    command = command + str;
-                } else {
-                    command = command + " && " + str;
-                }
-            }
-        }
-
-        $scope.cmd = command;
-    };
-
     $scope.open = function () {
+        if($scope.selection.length <= 0) {
+            $scope.addAlert('danger', 'You are not authorized to access this area.');
+            return;
+        }
         var modalInstance = $modal.open({
             animation: true,
             templateUrl: 'compileModal.html',
@@ -74,6 +78,7 @@ app.controller('FormController', function ($scope, $http, $location, AppService,
 
         modalInstance.result.then(function () {
             console.log('success');
+            $scope.addAlert('success', 'Well done! You successfully read this important alert message.');
         }, function () {
             console.log('cancel');
         });
@@ -84,6 +89,10 @@ app.controller('CompilerModalController', function ($scope, $modalInstance, sele
     $scope.selection = selection;
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
+    };
+
+    $scope.ok = function () {
+        $modalInstance.close();
     };
 
     var command = "";

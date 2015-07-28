@@ -8,10 +8,19 @@ div(class='modal-body')
         div(class='panel-footer')
             pre {{ cmd }}
 
-    p Paste that at a Terminal prompt.
+    div(class='row')
+        div(class='col-xs-6 col-md-6')
+            p Paste that into the Terminal
+        div(class='col-xs-6 col-md-6')
+            p Click the Spotlight icon in the menu bar, or Press
+                code Command (⌘)-Space bar
+                | Enter "Terminal" into the search.
+            p Press
+                code Command (⌘)-V
+                | to install the selected apps. The script will echo what is currently being installed.
 
 div(class='modal-footer')
     button(class='btn btn-default' ng-click='cancel()') Close
-    button(class='btn btn-primary' clip-copy="cmd")
+    button(class='btn btn-primary' clip-copy="cmd" ng-click='ok()')
         span(class="glyphicon glyphicon-copy" aria-hidden="true")
         |  Copy to Clipboard

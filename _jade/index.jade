@@ -19,9 +19,8 @@ html(ng-app='mac-apps-manager')
             form(class='tools' ng-submit='submit()')
                 h1(class='page-header') Mac Apps Manager
 
-                div(class="alert alert-warning" role="alert")
-                    Strong Warning!
-                    |  We are still under development.
+                alert(ng-repeat='alert in alerts' type='{{ alert.type }}' close='closeAlert($index)')
+                    | {{ alert.msg }}
 
                 div(class='docs-container')
                     div(class='docs-section')
@@ -56,7 +55,7 @@ html(ng-app='mac-apps-manager')
                                         | {{ misc.name }}
 
                     div(class='docs-section')
-                        button(type='submit' class='btn btn-default btn-lg btn-block' ng-click='open()') Compile
+                        button(type='submit' class='btn btn btn-primary btn-lg btn-block' ng-click='open()' ng-disabled='selection <= 0') Compile
 
 footer(class='docs-footer')
-    p Alpha v0.1.0
+    p Alpha v0.1.2
