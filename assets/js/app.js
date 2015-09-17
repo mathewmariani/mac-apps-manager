@@ -78,7 +78,7 @@ app.controller('FormController', function ($scope, $http, $location, AppService,
 
         modalInstance.result.then(function () {
             console.log('success');
-            $scope.addAlert('success', 'Well done! You successfully read this important alert message.');
+            $scope.addAlert('success', 'Well done! Now paste that command into the Terminal.');
         }, function () {
             console.log('cancel');
         });
